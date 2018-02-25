@@ -1,0 +1,1 @@
+DOCKER_OPTS="-s zfs --storage-opt zfs.fsname=zpool-external/docker -g /zpool-external/docker"

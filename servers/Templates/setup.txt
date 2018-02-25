@@ -1,0 +1,8 @@
+sudo apt install vim docker-compose screen zfs ddclient
+sudo usermod -a -G docker logank
+
+# /etc/UPower/Upower.conf
+IgnoreLid=true
+
+# /etc/systemd/logind.conf
+HandleLidSwitch=lock
