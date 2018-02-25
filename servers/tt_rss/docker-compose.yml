@@ -1,0 +1,46 @@
+version: '2'
+
+volumes:
+  db:
+
+networks:
+  proxy-tier:
+    external:
+      name: proxy-tier
+  default:
+
+services:
+  app:  
+    image: clue/ttrss
+    restart: unless-stopped
+    links:
+      - db
+    networks:
+      - proxy-tier
+      - default
+    env_file:
+      - app.env
+
+  # https://github.com/mboinet/ttrss-mobile.git
+  # https://github.com/g2ttrss/g2ttrss-mobile.git
+  mobile:
+    image: nginx
+    restart: unless-stopped
+    volumes:
+      #- ./ttrss-mobile:/usr/share/nginx/html:ro
+      - ./g2ttrss-mobile:/usr/share/nginx/html:ro
+    networks:
+      - proxy-tier
+    env_file:
+      - mobile.env
+
+  db:
+    image: postgres
+    restart: unless-stopped
+    volumes:
+      - db:/var/lib/postgresql/data
+    networks:
+      - default
+    env_file:
+      - db.env
+

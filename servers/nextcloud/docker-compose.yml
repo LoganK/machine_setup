@@ -1,0 +1,40 @@
+version: '2'
+
+volumes:
+  nextcloud:
+  nextcloud_data:
+  db:
+
+networks:
+  proxy-tier:
+    external:
+      name: proxy-tier
+  default:
+
+services:
+  app:  
+    hostname: nextcloud.runthejoules.info
+    build: ./docker/12.0/apache
+    #image: nextcloud:apache
+    restart: unless-stopped
+    links:
+      - db
+    volumes:
+      - nextcloud:/var/www/html
+      - nextcloud_data:/var/www/html/data
+    networks:
+      - proxy-tier
+      - default
+    env_file:
+      - db.env
+      - app.env
+
+  db:
+    image: postgres
+    restart: unless-stopped
+    volumes:
+      - db:/var/lib/postgresql/data
+    networks:
+      - default
+    env_file:
+      - db.env
