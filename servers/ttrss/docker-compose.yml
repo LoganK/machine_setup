@@ -1,7 +1,7 @@
 version: '2'
 
 volumes:
-  db:
+  db11:
 
 networks:
   proxy-tier:
@@ -35,10 +35,10 @@ services:
       - mobile.env
 
   db:
-    image: postgres
+    image: postgres:11
     restart: unless-stopped
     volumes:
-      - db:/var/lib/postgresql/data
+      - db11:/var/lib/postgresql/data
     networks:
       - default
     env_file:
