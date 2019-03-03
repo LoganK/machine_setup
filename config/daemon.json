@@ -1,0 +1,5 @@
+{
+  "storage-driver": "zfs",
+  "storage-opt": "zfs.fsname=zpool-external/docker",
+  "data-root": "/zpool-external/docker"
+}
