@@ -1,0 +1,3 @@
+sudo mount -t zfs zpool-external/docker@autosnap_2019-03-03_08:00:29_hourly /mnt/docker_recovery
+sudo cp -a {/mnt/docker_recovery,/zpool-external/docker}/volumes/nextcloud_nextcloud/_data
+sudo umount /mnt/docker_recovery
