@@ -1,0 +1,9 @@
+[Unit]
+Description=ddclient firing
+
+[Timer]
+OnUnitActiveSec=300s
+OnBootSec=10s
+
+[Install]
+WantedBy=timers.target

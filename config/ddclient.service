@@ -1,0 +1,8 @@
+#/etc/systemd/system/ddclient.service
+[Unit]
+Description=ddclient Service
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/sbin/ddclient
