@@ -1,8 +1,23 @@
 sudo apt install vim docker-compose screen zfs ddclient
 sudo usermod -a -G docker logank
 
+# Samba
+sudo useradd -M -N -u 998 smb_backup
+sudo smbpasswd -a smb_backup
+sudo smbpasswd -a logank
+
 # /etc/UPower/Upower.conf
 IgnoreLid=true
 
 # /etc/systemd/logind.conf
 HandleLidSwitch=lock
+
+sudo apt install virtualbox
+VBoxManage --version
+wget http://download.virtualbox.org/virtualbox/5.1.30/Oracle_VM_VirtualBox_Extension_Pack-5.1.30.vbox-extpack
+VBoxManage extpack uninstall "Oracle VM VirtualBox Extension Pack"
+VBoxManage extpack install ./Oracle_VM_VirtualBox_Extension_Pack-5.1.30.vbox-extpack
+# http://download.virtualbox.org/virtualbox/
+VBoxManage modifyvm "Windows 10 Pro" --clipboard bidirectional
+VBoxManage storageattach "Windows 10 Pro" --storagectl SATA --port 1 --device 0 --type dvddrive --medium ./VBoxGuestAdditions_5.1.30.iso
+VBoxManage storageattach "Windows 10 Pro" --storagectl SATA --port 1 --device 0 --type dvddrive --medium emptydrive
