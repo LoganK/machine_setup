@@ -1,0 +1,26 @@
+# Use the backtick escape key for sanity.
+escape ``
+
+# Force scrollback data to the current terminal ... even if that's not a great idea.
+termcapinfo xterm* ti@:te@
+
+# vi-like region navigation
+bind j focus down
+bind k focus up
+bind h focus left
+bind l focus right
+
+
+# Lightly adopted from https://gist.github.com/joaopizani/2718397
+
+# the following two lines give a two-line status, with the current window highlighted
+hardstatus alwayslastline
+hardstatus string '%{= kG}[%= %{= kw}%-w%{+b yk} %n*%t%?(%u)%? %{-}%+w %=%{g}][%{B}%m/%d %{W}%C%A%{g}]'
+
+# huge scrollback buffer
+defscrollback 50000
+
+# no welcome message
+startup_message off
+
+shell "/usr/bin/zsh"
