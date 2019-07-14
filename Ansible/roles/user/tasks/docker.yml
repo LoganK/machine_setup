@@ -1,0 +1,25 @@
+- apt:
+    name: apt-transport-https,ca-certificates,software-properties-common
+  become: true
+- name: Docker - Add signing key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    id: 0EBFCD88
+- name: Docker - Set up the stable repository
+  apt_repository:
+    repo: "deb https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+  become: true
+
+- name: Docker - Install
+  apt:
+    name: docker-ce,docker-compose
+  become: true
+
+- name: Docker - Create "docker" group
+  group:
+    name: docker
+- name: Docker - Add current user to "docker" group
+  user:
+    name: "{{ ansible_user_id }}"
+    groups: docker
+    append: yes

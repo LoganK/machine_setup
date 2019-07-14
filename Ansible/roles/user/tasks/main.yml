@@ -1,0 +1,12 @@
+# Install frequently-used tools for all computers.
+
+- apt:
+    name: vim,git,screen,zsh
+  become: true
+
+- import_tasks: krypton.yml
+  tags: [ krypton ]
+
+- import_tasks: docker.yml
+  tags: [ docker ]
+
