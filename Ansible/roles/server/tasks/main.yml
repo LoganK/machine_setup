@@ -1,2 +1,6 @@
-- apt: name=zfsutils-linux
-- apt: name=ddclient
+- apt:
+    name: zfsutils-linux
+  become: true
+
+- import_tasks: ddclient.yml
+  tags: [ ddclient ]

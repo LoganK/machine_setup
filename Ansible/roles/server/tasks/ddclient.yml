@@ -1,0 +1,27 @@
+- name: ddclient Install
+  apt:
+    name: ddclient
+  become: true
+
+- name: ddclient Config
+  copy:
+    src: "{{ item }}"
+    dest: /etc/systemd/system
+    force: no
+  with_items:
+    - ddclient.service
+    - ddclient.timer
+  become: true
+
+# I prefer a systemd timer to avoid consuming RAM between checks
+- name: ddclient Stopping legacy config
+  sysvinit:
+      name: ddclient
+      state: stopped
+      enabled: no
+- name: ddclient Starting
+  systemd:
+    name: ddclient.timer
+    state: started
+    enabled: yes
+  become: true
