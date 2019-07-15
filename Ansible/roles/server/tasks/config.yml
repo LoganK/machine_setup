@@ -1,0 +1,20 @@
+- name: SSH - Disallow agent forwarding
+  lineinfile:
+    path: "{{ sshdconfig }}"
+    regexp: "^[# ]*AllowAgentForwarding (yes|no)"
+    line: "AllowAgentForwarding no"
+  become: true
+  register: sshd_config
+- name: SSH - Allow gateway ports
+  lineinfile:
+    path: "{{ sshdconfig }}"
+    regexp: "^[# ]*GatewayPorts (yes|no)"
+    line: "GatewayPorts yes"
+  become: true
+  register: sshd_config
+- systemd:
+    name: ssh.service
+    state: reloaded
+  become: true
+  when: sshd_config.changed
+

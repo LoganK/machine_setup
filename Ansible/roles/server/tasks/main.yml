@@ -4,3 +4,7 @@
 
 - import_tasks: ddclient.yml
   tags: [ ddclient ]
+
+- import_tasks: config.yml
+  tags: [ server_config ]
+
