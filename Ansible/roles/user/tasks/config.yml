@@ -1,0 +1,16 @@
+- name: git - Diff3 style
+  git_config:
+    name: merge.conflictstyle
+    scope: global
+    value: diff3
+- name: git - Install ignore file
+  copy:
+    src: gitignore_global
+    dest: "{{ ansible_user_dir }}/.gitignore_global"
+    force: no
+- name: git - Configure global ignores
+  git_config:
+    name: core.excludesfile
+    scope: global
+    value: "{{ ansible_user_dir }}/.gitignore_global"
+

@@ -4,6 +4,9 @@
     name: vim,git,screen,zsh
   become: true
 
+- import_tasks: config.yml
+  tags: [ config ]
+
 - import_tasks: krypton.yml
   tags: [ krypton ]
 
