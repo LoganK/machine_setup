@@ -9,3 +9,9 @@
 
 - import_tasks: docker.yml
   tags: [ docker ]
+
+- name: Serial Dev - Add current user to "dialout" group
+  user:
+    name: "{{ ansible_user_id }}"
+    groups: dialout
+    append: yes
