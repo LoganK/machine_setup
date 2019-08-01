@@ -11,9 +11,9 @@ networks:
 
 services:
   app:  
-    image: clue/ttrss
+    image: linuxserver/tt-rss
     restart: unless-stopped
-    links:
+    depends_on:
       - db
     networks:
       - proxy-tier
