@@ -1,3 +1,5 @@
+export PS1=$'%K{blue}%n@%m%k %W %*\n%B%F{cyan}%(4~|...|)%3~%F{white} %# %b%f%k'
+
 autoload -U select-word-style
 select-word-style bash
 setopt histignorealldups inc_append_history noshare_history
