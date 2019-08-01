@@ -19,6 +19,7 @@
       name: ddclient
       state: stopped
       enabled: no
+  become: true
 - name: ddclient Starting
   systemd:
     name: ddclient.timer

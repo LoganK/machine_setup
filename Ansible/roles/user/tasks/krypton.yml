@@ -10,6 +10,7 @@
 - name: Adding KryptCo repository
   apt_repository:
     repo: deb http://kryptco.github.io/deb kryptco main
+  become: true
 - apt:
     name: kr
   become: true
