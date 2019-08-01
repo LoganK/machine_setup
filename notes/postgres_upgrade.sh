@@ -39,7 +39,7 @@ docker stop $DBC
 
 docker volume create --name ${VOLUME_NEW}
 DBD=$(docker run --rm -d --env-file ./db.env -v ${VOLUME_NEW}:/var/lib/postgresql/data ${POSTGRES_NEW})
-echo -n "Wait for old startup"
+echo -n "Wait for new startup"
 docker exec $DBD bash -c "while ! psql -U ${POSTGRES_USER} -c '\\dt' >& /dev/null; do echo -n .; sleep .2; done"
 echo ""
 gzip -dc ${DUMPFILE} | docker exec $DBD psql -U ${POSTGRES_USER}
