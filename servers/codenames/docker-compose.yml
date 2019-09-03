@@ -1,0 +1,22 @@
+version: '3'
+
+networks:
+  default:
+  proxy-tier:
+    external:
+      name: proxy-tier
+
+
+services:
+  app:
+    build:
+      context: .
+    restart: unless-stopped
+    networks:
+      - default
+      - proxy-tier
+    ports:
+      - "80"
+    env_file:
+      - app.env
+
