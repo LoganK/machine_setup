@@ -1,0 +1,16 @@
+- name: podman - Requirements
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+      - software-properties-common
+      - uidmap
+  become: true
+- name: podman - Set up the stable repository
+  apt_repository:
+    repo: "ppa:projectatomic/ppa"
+  become: true
+- name: podman - Install
+  apt:
+    name: podman
+  become: true
