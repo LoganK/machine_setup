@@ -1,0 +1,8 @@
+# Ansible config for my home server.
+
+- hosts: localhost
+  module_defaults:
+    apt:
+      state: latest
+  roles:
+  - user
