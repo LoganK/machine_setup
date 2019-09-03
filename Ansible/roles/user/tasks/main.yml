@@ -9,6 +9,8 @@
 
 - import_tasks: krypton.yml
   tags: [ krypton ]
+  when: "ansible_machine not in ['armv7l',]"
+
 
 - import_tasks: docker.yml
   tags: [ docker ]
@@ -22,3 +24,4 @@
     name: "{{ ansible_user_id }}"
     groups: dialout
     append: yes
+  become: true

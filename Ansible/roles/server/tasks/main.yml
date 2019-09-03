@@ -1,5 +1,7 @@
 - apt:
     name: zfsutils-linux
+  # Useful, but not available everywhere.
+  tags: [ never, zfs ]
   become: true
 
 - import_tasks: ddclient.yml

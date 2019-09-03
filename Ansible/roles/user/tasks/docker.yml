@@ -1,19 +1,27 @@
 - apt:
     name: apt-transport-https,ca-certificates,software-properties-common
   become: true
+
+- name: Narrower distribution ID
+  shell: /usr/bin/lsb_release -i -s | tr "[:upper:]" "[:lower:]"
+  register: my_distribution
+  changed_when: False
+
 - name: Docker - Add signing key
   apt_key:
-    url: https://download.docker.com/linux/ubuntu/gpg
+    url: "https://download.docker.com/linux/{{ my_distribution.stdout }}/gpg"
     id: 0EBFCD88
   become: true
 - name: Docker - Set up the stable repository
   apt_repository:
-    repo: "deb https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+    repo: "deb https://download.docker.com/linux/{{ my_distribution.stdout }} {{ ansible_distribution_release }} stable"
   become: true
 
 - name: Docker - Install
   apt:
     name: docker-ce,docker-compose
+    # aufs-dkms is not yet supported in Raspbian.
+    install_recommends: no
   become: true
 
 - name: Docker - Create "docker" group
@@ -24,3 +32,4 @@
     name: "{{ ansible_user_id }}"
     groups: docker
     append: yes
+  become: true
