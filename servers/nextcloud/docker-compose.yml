@@ -17,7 +17,7 @@ services:
     # Nextcloud does not support upgrades across multiple major versions.
     # Worse, it does a partial upgrade and then leaves the files neither old
     # nor new.
-    image: nextcloud:15
+    image: nextcloud:17
     restart: unless-stopped
     links:
       - db
