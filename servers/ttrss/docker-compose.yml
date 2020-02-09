@@ -11,7 +11,7 @@ networks:
 
 services:
   app:  
-    image: linuxserver/tt-rss
+    image: lunik1/tt-rss
     restart: unless-stopped
     depends_on:
       - db
