@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+set -e -u
 
 docker-compose exec -u www-data app php occ maintenance:mode --on
 
