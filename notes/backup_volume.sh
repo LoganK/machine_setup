@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+set -e -u
 
 if [ "$#" -ne 1 ]; then
   cat <<zzzEOLzzz
@@ -18,9 +18,10 @@ fi
 VOLUME=$1
 BACKUP_DIR=${BACKUP_DIR:-backup}
 
-DUMPFILE="${BACKUP_DIR?}/${VOLUME?}.$(date +%F_%R).tar.gz"
+DUMP_DIR="${BACKUP_DIR}/vol.${VOLUME}"
+DUMPFILE="${DUMP_DIR}/$(date +%F_%R).tar.gz"
 echo "Creating ${DUMPFILE}..."
-mkdir -p "${BACKUP_DIR}"
+mkdir -p "${DUMP_DIR}"
 docker run --rm -v ${VOLUME}:/data alpine ash -c \
   "tar cpz -C /data ." > ${DUMPFILE}
 
