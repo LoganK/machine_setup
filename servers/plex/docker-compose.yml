@@ -25,4 +25,4 @@ services:
     volumes:
       - config:/config
       - transcode:/transcode
-      - /zpool-external/media:/data
+      - /vgbulk/media:/data
