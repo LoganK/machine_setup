@@ -11,6 +11,6 @@ source db.env
 DUMP_DIR="${BACKUP_DIR}/postgres.${DBC}"
 DUMPFILE="${DUMP_DIR}/$(date +%F_%R).sql.gz"
 echo "Creating ${DUMPFILE}..."
-mkdir -p "${BACKUP_DIR}"
+mkdir -p "${DUMP_DIR}"
 docker-compose exec $DBC pg_dumpall -U ${POSTGRES_USER} | gzip > ${DUMPFILE}
 
