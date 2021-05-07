@@ -25,4 +25,4 @@ services:
     volumes:
       - config:/config
       - transcode:/transcode
-      - /vgbulk/media:/data
+      - /zfast/media:/data
