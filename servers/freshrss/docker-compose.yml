@@ -1,0 +1,23 @@
+---
+version: "2.1"
+
+volumes:
+  data:
+  extensions:
+
+networks:
+  proxy-tier:
+    external:
+      name: proxy-tier
+
+services:
+  app:
+    image: freshrss/freshrss
+    volumes:
+      - data:/var/www/FreshRSS/data
+      - extensions:/var/www/FreshRSS/extensions
+    networks:
+      - proxy-tier
+    restart: unless-stopped
+    env_file:
+      - app.env
