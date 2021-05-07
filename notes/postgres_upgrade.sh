@@ -18,7 +18,7 @@ VOLUME_NEW=$2
 
 VOLUME_BACKUP=${VOLUME_OLD}_backup
 POSTGRES_OLD=postgres:10
-POSTGRES_NEW=postgres:11
+POSTGRES_NEW=postgres:13
 
 # Get POSTGRES_{DB,USER,PASSWORD}
 source db.env
@@ -42,7 +42,7 @@ DBD=$(docker run --rm -d --env-file ./db.env -v ${VOLUME_NEW}:/var/lib/postgresq
 echo -n "Wait for new startup"
 docker exec $DBD bash -c "while ! psql -U ${POSTGRES_USER} -c '\\dt' >& /dev/null; do echo -n .; sleep .2; done"
 echo ""
-gzip -dc ${DUMPFILE} | docker exec $DBD psql -U ${POSTGRES_USER}
+gzip -dc ${DUMPFILE} | docker exec -i $DBD psql -U ${POSTGRES_USER}
 docker stop $DBD
 
 # Force 
