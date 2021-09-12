@@ -2,6 +2,7 @@ set ttymouse=
 
 syntax on
 set background=dark
+set wildmode=longest,list
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 filetype plugin indent on
 set showcmd		" Show (partial) command in status line.
