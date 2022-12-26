@@ -1,0 +1,29 @@
+version: '3'
+
+volumes:
+  config:
+  log:
+  mysql:
+
+networks:
+  proxy-tier:
+    name: proxy-tier
+    external: true
+  default:
+
+services:
+  app:  
+    image: ampache/ampache:latest
+    restart: unless-stopped
+    networks:
+      - proxy-tier
+      - default
+    volumes:
+      - config:/var/www/config
+      - log:/var/log/ampache
+      - /zfast/media/Music:/media:ro
+      - mysql:/var/lib/mysql
+    env_file:
+      - app.env
+
+
