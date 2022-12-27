@@ -3,6 +3,9 @@ set -e -u
 
 BACKUP_DIR=${BACKUP_DIR:-backup}
 
+# Allow compose to create the volumes.
+docker compose up --no-start
+
 for volume in ${BACKUP_DIR}/vol.*; do
   volume_name=$(basename ${volume} | sed 's|vol.||');
   latest_file="${volume}/$(ls -1r ${volume}/ | head -n1)";

@@ -22,11 +22,11 @@ fi
 
 volume_exists=1
 docker volume inspect "${VOLUME}" >& /dev/null || volume_exists=0
-if [[ ${volume_exists} != 0 ]]; then
-  1>&2 echo "Failing restore as $VOLUME already exists";
-  exit 1
-fi
+#if [[ ${volume_exists} != 0 ]]; then
+#  1>&2 echo "Failing restore as $VOLUME already exists";
+#  exit 1
+#fi
 
-docker volume create ${VOLUME}
+#docker volume create ${VOLUME}
 docker run --rm -i -v ${VOLUME}:/data alpine ash -c \
    "tar xpz -C /data" < "${DUMPFILE}"
