@@ -7,8 +7,8 @@ volumes:
 
 networks:
   proxy-tier:
-    external:
-      name: proxy-tier
+    name: proxy-tier
+    external: true
 
 services:
   app:
