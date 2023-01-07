@@ -1,0 +1,34 @@
+version: '3'
+
+volumes:
+  vw_data:
+  db15:
+
+networks:
+  proxy-tier:
+    external: true
+  default:
+    internal: true
+
+services:
+  app:
+    image: vaultwarden/server:latest
+    restart: unless-stopped
+    depends_on:
+      - db
+    networks:
+      - default
+      - proxy-tier
+    volumes:
+      - vw_data:/data
+    env_file:
+      - app.env
+
+  db:
+    image: postgres:15
+    restart: unless-stopped
+    volumes:
+      - db15:/var/lib/postgresql/data
+    env_file:
+      - db.env
+
