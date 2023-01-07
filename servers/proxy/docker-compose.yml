@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 
 volumes:
   proxy_certs:
@@ -9,8 +9,7 @@ volumes:
 
 networks:
   proxy-tier:
-    external:
-      name: proxy-tier
+    external: true
 
 services:
   proxy:
