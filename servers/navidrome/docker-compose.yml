@@ -1,0 +1,27 @@
+version: "3"
+
+volumes:
+  data:
+
+networks:
+  proxy-tier:
+    external: true
+  default:
+
+
+services:
+  app:
+    image: deluan/navidrome:latest
+    restart: unless-stopped
+    networks:
+      - proxy-tier
+      - default
+    volumes:
+      - data:/data
+      - /zfast/media/Music:/music:ro
+    environment:
+      ND_SCANSCHEDULE: 15m
+    env_file:
+      - app.env
+
+
