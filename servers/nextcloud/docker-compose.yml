@@ -3,12 +3,11 @@ version: '3'
 volumes:
   nextcloud:
   nextcloud_data:
-  db13:
+  db15:
 
 networks:
   proxy-tier:
-    external:
-      name: proxy-tier
+    external: true
   default:
 
 services:
@@ -17,7 +16,7 @@ services:
     # Nextcloud does not support upgrades across multiple major versions.
     # Worse, it does a partial upgrade and then leaves the files neither old
     # nor new.
-    image: nextcloud:21
+    image: nextcloud:25
     restart: unless-stopped
     links:
       - db
@@ -33,11 +32,9 @@ services:
 
   db:
     # Nextcloud currently doesn't support anything past Postgres 10.
-    image: postgres:13
+    image: postgres:15
     restart: unless-stopped
     volumes:
-      - db13:/var/lib/postgresql/data
-    networks:
-      - default
+      - db15:/var/lib/postgresql/data
     env_file:
       - db.env
