@@ -38,3 +38,16 @@ services:
       - db15:/var/lib/postgresql/data
     env_file:
       - db.env
+
+##   collabora:
+##     image: collabora/code:6.4.14.3
+##     restart: unless-stopped
+##     networks:
+##       - default
+##     ports:
+##       - 9980:9980
+##     cap_add:
+##       - MKNOD
+##     env_file:
+##       - collabora.env
+## 
