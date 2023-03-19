@@ -1,0 +1,1 @@
+php occ config:system:set overwriteprotocol --value=https
