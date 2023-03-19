@@ -1,1 +1,5 @@
 *.retry
+
+*.sql.gz
+/servers/*/backup/
+
