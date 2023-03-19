@@ -1,0 +1,26 @@
+---
+version: "3.8"
+
+volumes:
+  config:
+  cache:
+
+networks:
+  proxy-tier:
+    name: proxy-tier
+    external: true
+
+services:
+  app:
+    image: jellyfin/jellyfin
+    restart: unless-stopped
+    user: 65534:100
+    networks:
+      - proxy-tier
+    env_file:
+      - app.env
+    volumes:
+      - config:/config
+      - cache:/cache
+      - /zfast/media/TV Shows:/media1:ro
+      - /zfast/media/Movies:/media2:ro
