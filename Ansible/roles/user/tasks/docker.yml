@@ -8,9 +8,10 @@
   changed_when: False
 
 - name: Docker - Add signing key
-  apt_key:
+  ansible.builtin.get_url:
     url: "https://download.docker.com/linux/{{ my_distribution.stdout }}/gpg"
-    id: 0EBFCD88
+    dest: /etc/apt/trusted.gpg.d/docker.asc
+    mode: '0644'
   become: true
 - name: Docker - Set up the stable repository
   apt_repository:

@@ -3,9 +3,10 @@
     name: software-properties-common,dirmngr,apt-transport-https
   become: true
 - name: Adding KryptCo signing key
-  apt_key:
-    keyserver: hkp://keyserver.ubuntu.com:80
-    id: C4A05888A1C4FA02E1566F859F2A29A569653940
+  ansible.builtin.get_url:
+    url: "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0xC4A05888A1C4FA02E1566F859F2A29A569653940"
+    dest: /etc/apt/trusted.gpg.d/kryptco.asc
+    mode: '0644'
   become: true
 - name: Adding KryptCo repository
   apt_repository:
