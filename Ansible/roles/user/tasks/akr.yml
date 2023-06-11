@@ -1,0 +1,33 @@
+- name: akr - Check if present
+  ansible.builtin.stat:
+    path: "{{ ansible_env.HOME }}/bin/akr"
+  register: akr_exists
+  ignore_errors: yes
+  changed_when: false
+
+- import_tasks: rust.yml
+  tags: [ rust ]
+
+# Install from source because the official repo depends on an ancient version
+# of libssl.
+- name: akr - Download source
+  when: not akr_exists.stat.exists
+  git:
+    repo: https://github.com/akamai/akr
+    dest: /tmp/akr
+    update: yes
+- name: akr - Install build dependencies
+  when: not akr_exists.stat.exists
+  apt:
+    name: pkg-config
+  become: true
+- name: akr - Build
+  when: not akr_exists.stat.exists
+  ansible.builtin.command:
+    cmd: cargo build --release
+    chdir: /tmp/akr
+- name: akr - Copy build
+  when: not akr_exists.stat.exists
+  ansible.builtin.copy:
+    src: /tmp/akr/target/releases/akr
+    dst: "{{ ansible_env.HOME }}/bin"
