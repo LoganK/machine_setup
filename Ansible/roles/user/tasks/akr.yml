@@ -19,7 +19,7 @@
 - name: akr - Install build dependencies
   when: not akr_exists.stat.exists
   apt:
-    name: pkg-config
+    name: pkg-config,clang,libssl-dev
   become: true
 - name: akr - Build
   when: not akr_exists.stat.exists
@@ -29,5 +29,5 @@
 - name: akr - Copy build
   when: not akr_exists.stat.exists
   ansible.builtin.copy:
-    src: /tmp/akr/target/releases/akr
-    dst: "{{ ansible_env.HOME }}/bin"
+    src: /tmp/akr/target/release/akr
+    dest: "{{ ansible_env.HOME }}/bin"
