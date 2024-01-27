@@ -19,7 +19,7 @@
 - name: akr - Install build dependencies
   when: not akr_exists.stat.exists
   apt:
-    name: pkg-config,clang,libssl-dev
+    name: pkg-config,clang,libssl-dev,make
   become: true
 - name: akr - Build
   when: not akr_exists.stat.exists
