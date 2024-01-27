@@ -13,4 +13,16 @@
     name: core.excludesfile
     scope: global
     value: "{{ ansible_user_dir }}/.gitignore_global"
+- name: tmux config
+  copy:
+    src: tmux.conf
+    dest: "{{ ansible_env.XDG_CONFIG_HOME }}/tmux/"
+- name: vim config
+  copy:
+    src: vimrc
+    dest: "{{ ansible_user_dir }}/.vimrc"
+- name: zsh config
+  copy:
+    src: zshrc
+    dest: "{{ ansible_user_dir }}/.zshrc"
 

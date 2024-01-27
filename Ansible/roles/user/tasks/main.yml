@@ -1,7 +1,7 @@
 # Install frequently-used tools for all computers.
 
 - apt:
-    name: vim,git,screen,zsh
+    name: vim,git,tmux,zsh
   become: true
 
 - import_tasks: config.yml
