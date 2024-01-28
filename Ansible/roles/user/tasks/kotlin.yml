@@ -1,0 +1,13 @@
+- name: kotlin - Dependencies
+  apt:
+    name: default-jre-headless
+  become: true
+- name: kotlin - ktfmt
+  copy:
+    src: ktfmt
+    dest: "{{ ansible_user_dir }}/bin/"
+- name: kotlin - ktfmt fetch
+  get_url:
+    url: https://repo1.maven.org/maven2/com/facebook/ktfmt/0.47/ktfmt-0.47-jar-with-dependencies.jar
+    dest: "{{ ansible_user_dir }}/bin/"
+
