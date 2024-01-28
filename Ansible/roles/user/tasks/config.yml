@@ -25,4 +25,12 @@
   copy:
     src: zshrc
     dest: "{{ ansible_user_dir }}/.zshrc"
+- name: SSH agent
+  copy:
+    src: environment.d_ssh-agent.conf
+    dest: "{{ ansible_env.XDG_CONFIG_HOME }}/environment.d/"
+- name: SSH agent
+  copy:
+    src: ssh-agent.service
+    dest: "{{ ansible_env.XDG_CONFIG_HOME }}/systemd/user/"
 
