@@ -30,4 +30,4 @@
   when: not akr_exists.stat.exists
   ansible.builtin.copy:
     src: /tmp/akr/target/release/akr
-    dest: "{{ ansible_env.HOME }}/bin"
+    dest: "{{ ansible_env.HOME }}/bin/"
