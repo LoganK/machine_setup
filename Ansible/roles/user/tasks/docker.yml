@@ -20,7 +20,7 @@
 
 - name: Docker - Install
   apt:
-    name: docker-ce,docker-compose
+    name: docker-ce,docker-compose-plugin
     # aufs-dkms is not yet supported in Raspbian.
     install_recommends: no
   become: true
