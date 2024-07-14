@@ -23,13 +23,13 @@ DBC=${DBC:-db}
 source db.env
 
 echo -n "Starting database ${DBC} to restore ${DUMPFILE}"
-docker-compose up -d ${DBC}
+docker compose up -d ${DBC}
 sleep 3
-docker-compose exec ${DBC} bash -c "while ! psql -U ${POSTGRES_USER} -c '\\dt' >& /dev/null; do echo -n .; sleep .2; done"
+docker compose exec ${DBC} bash -c "while ! psql -U ${POSTGRES_USER} -c '\\dt' >& /dev/null; do echo -n .; sleep .2; done"
 echo ""
 
-gzip -dc ${DUMPFILE} | docker-compose exec -T ${DBC} psql -U ${POSTGRES_USER} > /dev/null
+gzip -dc ${DUMPFILE} | docker compose exec -T ${DBC} psql -U ${POSTGRES_USER} > /dev/null
 
 echo "Stopping database"
-docker-compose stop ${DBC}
+docker compose stop ${DBC}
 
