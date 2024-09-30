@@ -1,5 +1,4 @@
-version: '3'
-
+---
 volumes:
   proxy_certs:
   proxy_config:
