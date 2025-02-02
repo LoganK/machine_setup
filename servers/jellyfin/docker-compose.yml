@@ -22,3 +22,4 @@ services:
       - cache:/cache
       - /zfast/media/TV Shows:/media1:ro
       - /zfast/media/Movies:/media2:ro
+      - /zfast/media/Comedy Sets:/media3:ro
