@@ -4,7 +4,6 @@ volumes:
 networks:
   proxy-tier:
     external: true
-  default:
 
 
 services:
@@ -13,7 +12,6 @@ services:
     restart: unless-stopped
     networks:
       - proxy-tier
-      - default
     volumes:
       - data:/data
       - /zfast/media/Music:/music:ro
