@@ -2,12 +2,12 @@
 
 set -e
 
-if [ "$#" -ne 2 ]; then
+if [ "$#" -ne 4 ]; then
   cat <<zzzEOLzzz
 Upgrades the Docker volume data for a Postgres database.
 
 Usage:
-  $0 <volume_old> <volume_new>
+  $0 <volume_old> <volume_new> <old_version> <new_version>
 zzzEOLzzz
 
   exit 1
@@ -17,8 +17,8 @@ VOLUME_OLD=$1
 VOLUME_NEW=$2
 
 VOLUME_BACKUP=${VOLUME_OLD}_backup
-POSTGRES_OLD=postgres:15
-POSTGRES_NEW=postgres:16
+POSTGRES_OLD=postgres:$3
+POSTGRES_NEW=postgres:$4
 
 # Get POSTGRES_{DB,USER,PASSWORD}
 source db.env
@@ -37,7 +37,8 @@ echo "Creating ${DUMPFILE}..."
 docker exec $DBC pg_dumpall -U ${POSTGRES_USER} | gzip > ${DUMPFILE}
 docker stop $DBC
 
-docker volume create --name ${VOLUME_NEW}
+# docker volume create --name ${VOLUME_NEW}
+docker compose up --no-start
 DBD=$(docker run --rm -d --env-file ./db.env -v ${VOLUME_NEW}:/var/lib/postgresql/data ${POSTGRES_NEW})
 echo -n "Wait for new startup"
 docker exec $DBD bash -c "while ! psql -U ${POSTGRES_USER} -c '\\dt' >& /dev/null; do echo -n .; sleep .2; done"
