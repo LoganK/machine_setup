@@ -1,0 +1,4 @@
+On source system:
+useradd -m syncoid
+Add SSH key w/ no-port-forwarding,no-X11-forwarding,no-agent-forwarding,no-pty
+zfs allow -d syncoid send,hold zpool
