@@ -1,0 +1,8 @@
+[Unit]
+Description=zfast,zslow to zbackup_black Backup Service
+After=zfs.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/sbin/syncoid -r --no-sync-snap zfast zbackup_black/zfast
+ExecStart=/usr/sbin/syncoid -r --no-sync-snap zslow zbackup_black/zslow

@@ -1,0 +1,8 @@
+[Unit]
+Description=zfast,zslow Backup Firing
+
+[Timer]
+OnCalendar=daily
+
+[Install]
+WantedBy=timers.target
