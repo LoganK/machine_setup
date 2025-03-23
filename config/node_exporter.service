@@ -1,0 +1,9 @@
+[Unit]
+Description=node_exporter
+
+[Service]
+ExecStart=%h/bin/node_exporter --collector.systemd --collector.processes --web.listen-address=IP_ADDR:9100
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
