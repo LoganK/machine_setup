@@ -1,0 +1,19 @@
+networks:
+  victoriametrics_vm_net:
+    external: true
+
+services:
+  app:
+    image: containrrr/watchtower
+    restart: unless-stopped
+    networks:
+      - victoriametrics_vm_net
+    hostname: watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      WATCHTOWER_SCHEDULE: 47 12 02 * * FRI
+      WATCHTOWER_ROLLING_RESTART: true
+      WATCHTOWER_HTTP_API_METRICS: true
+      # WATCHTOWER_HTTP_API_TOKEN: $(tr -dc A-Za-z0-9 </dev/urandom | head -c 64)
+
