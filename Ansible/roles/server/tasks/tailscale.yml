@@ -1,0 +1,15 @@
+- name: Download Tailscale GPG Key
+  ansible.builtin.uri:
+    dest: /usr/share/keyrings/tailscale-archive-keyring.gpg
+    url: https://pkgs.tailscale.com/stable/ubuntu/{{ ansible_distribution_release }}.noarmor.gpg 
+
+- name: Add Tailscale repository
+  ansible.builtin.uri:
+    dest: /etc/apt/sources.list.d/tailscale.list
+    url: https://pkgs.tailscale.com/stable/ubuntu/{{ ansible_distribution_release }}.tailscale-keyring.list
+
+- name: Install Tailscale
+  ansible.builtin.apt:
+    name: tailscale
+    update_cache: true
+    state: present 

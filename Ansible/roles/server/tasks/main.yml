@@ -10,3 +10,8 @@
 - import_tasks: config.yml
   tags: [ server_config ]
 
+- name: Install Tailscale
+  import_tasks: tailscale.yml
+  tags: [ tailscale ]
+  become: true
+
