@@ -11,7 +11,7 @@
   tags: [ docker ]
 
 - import_tasks: akr.yml
-  tags: [ akr ]
+  tags: [ never, akr ]
 
 - import_tasks: kotlin.yml
   tags: [ kotlin ]
