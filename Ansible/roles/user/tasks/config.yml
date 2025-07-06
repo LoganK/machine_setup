@@ -16,7 +16,7 @@
 - name: tmux config
   copy:
     src: tmux.conf
-    dest: "{{ ansible_env.XDG_CONFIG_HOME }}/tmux/"
+    dest: "{{ ansible_user_dir }}/.config/tmux/"
 - name: vim config
   copy:
     src: vimrc
@@ -28,9 +28,9 @@
 - name: SSH agent
   copy:
     src: environment.d_ssh-agent.conf
-    dest: "{{ ansible_env.XDG_CONFIG_HOME }}/environment.d/"
+    dest: "{{ ansible_user_dir }}/.config/environment.d/"
 - name: SSH agent
   copy:
     src: ssh-agent.service
-    dest: "{{ ansible_env.XDG_CONFIG_HOME }}/systemd/user/"
+    dest: "{{ ansible_user_dir }}/.config/systemd/user/"
 
