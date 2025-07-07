@@ -1,6 +1,6 @@
 volumes:
   vw_data:
-  db16:
+  db17:
 
 networks:
   proxy-tier:
@@ -11,22 +11,30 @@ networks:
 services:
   app:
     image: vaultwarden/server:latest
-    restart: unless-stopped
+    restart: always
+    ports:
+      - "80"
     depends_on:
       - db
     networks:
       - default
       - proxy-tier
     volumes:
-      - vw_data:/data
+      - type: volume
+        source: vw_data
+        target: /data
     env_file:
       - app.env
 
   db:
-    image: postgres:16
-    restart: unless-stopped
+    image: postgres:17
+    restart: always
+    ports:
+      - "5432"
     volumes:
-      - db16:/var/lib/postgresql/data
+      - type: volume
+        source: db17
+        target: /var/lib/postgresql/data
     env_file:
       - db.env
 
