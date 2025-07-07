@@ -8,10 +8,9 @@ DBC=${DBC:-db}
 source db.env
 
 # Dump the old database
-DUMP_DIR="${BACKUP_DIR}/postgres.${DBC}"
-DUMPFILE="${DUMP_DIR}/$(date +%F_%R).sql.gz"
+DUMPFILE="${BACKUP_DIR}/postgres.${DBC}.$(date +%F_%R).sql.gz"
 echo "Creating ${DUMPFILE}..."
-mkdir -p "${DUMP_DIR}"
+mkdir -p "${BACKUP_DIR}"
 # docker compose exec $DBC pg_dumpall -U ${POSTGRES_USER} | gzip > ${DUMPFILE}
 docker compose exec $DBC pg_dump -U ${POSTGRES_USER} | gzip > ${DUMPFILE}
 

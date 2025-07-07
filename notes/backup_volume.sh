@@ -18,10 +18,9 @@ fi
 VOLUME=$1
 BACKUP_DIR=${BACKUP_DIR:-backup}
 
-DUMP_DIR="${BACKUP_DIR}/vol.${VOLUME}"
-DUMPFILE="${DUMP_DIR}/$(date +%F_%H_%M).tar.gz"
+DUMPFILE="${BACKUP_DIR}/vol.${VOLUME}.$(date +%F_%H_%M).tar.gz"
 echo "Creating ${DUMPFILE}..."
-mkdir -p "${DUMP_DIR}"
+mkdir -p "${BACKUP_DIR}"
 docker run --rm -v ${VOLUME}:/data alpine ash -c \
   "tar cpz -C /data ." > ${DUMPFILE}
 
