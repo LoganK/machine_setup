@@ -1,0 +1,33 @@
+---
+volumes:
+  certs:
+
+networks:
+  proxy-tier:
+    external: true
+
+services:
+  proxy:
+    image: traefik:v3
+    container_name: traefik
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges=true
+    networks:
+      - proxy-tier
+    ports:
+      - 80:80
+      - 443:443
+      - 9107:9107
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./traefik.yml:/traefik.yml:ro
+      - certs:/certs
+    environment:
+      - CF_DNS_API_TOKEN_FILE=/run/secrets/cf_dns_api_token
+    secrets:
+      - cf_dns_api_token
+
+secrets:
+  cf_dns_api_token:
+    file: ./cf_dns_api_token.secret
